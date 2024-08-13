@@ -1,12 +1,10 @@
-
 ## ZePo: Zero-Shot Portrait Stylization with Faster Sampling
+
 [Jin Liu](https://github.com/liujin112), [Huaibo Huang](https://scholar.google.com/citations?user=XMvLciUAAAAJ&hl=en&oi=sra), [Jie Cao](https://scholar.google.com/citations?user=lPLM5oMAAAAJ&hl=en), [Ran He](https://scholar.google.com/citations?user=ayrg9AUAAAAJ&hl=en&oi=sra).
 
 Pytorch implementation of [ZePo: Zero-Shot Portrait Stylization with Faster Sampling](https://arxiv.org/abs/2408.05492)
 
-
-[![arXiv](https://img.shields.io/badge/ArXiv-2408.05492-brightgreen)](https://arxiv.org/abs/2408.05492) 
-
+[![arXiv](https://img.shields.io/badge/ArXiv-2408.05492-brightgreen)](https://arxiv.org/abs/2408.05492)
 
 ---
 
@@ -18,12 +16,13 @@ Diffusion-based text-to-image generation models have significantly advanced the 
 
 ## To-do
 
-- [x] Release the code.
+- [X] Release the code.
 - [ ] Online Demo
 
 ## Usage
 
 ### Requirements
+
 We implement our method with [diffusers](https://github.com/huggingface/diffusers) and the code runs on Python 3.9.17 with Pytorch 2.0.1. You can install the environment by following commands.
 
 ```base
@@ -33,12 +32,10 @@ conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=
 pip install diffusers transformers gradio accelerate PEFT xformers==0.0.20
 ```
 
-
 ### Checkpoints
 
 **Latent Consistency Model:**
 Our method mainly based on Latent Consistency Model, [diffusers](https://github.com/huggingface/diffusers) automatically downloads the required model weights. If necessary, you can also manually download them from [this link](https://huggingface.co/SimianLuo/LCM_Dreamshaper_v7).
-
 
 ### Inference with example data:
 
@@ -47,6 +44,7 @@ bash run.sh
 ```
 
 ### Inference with your own data:
+
 Please place the style and content images into separate folders, and then run the following command.
 
 ```bash
@@ -60,19 +58,18 @@ python main.py --output 'PATH to Results' \
 ```
 
 ### Run the Local Gradio Demo:
+
 ```bash
 python app.py
 ```
 
-
-
-
 ## Acknowledgements
+
 Our code follows several excellent repositories. We appreciate them for making their codes available to the public.
+
 - [Prompt-to-Prompt](https://github.com/google/prompt-to-prompt)
 - [Masactrl](https://github.com/TencentARC/MasaCtrl)
 - [latent-consistency-model](https://github.com/luosiallen/latent-consistency-model)
-
 
 ## Citation
 
@@ -83,10 +80,8 @@ Our code follows several excellent repositories. We appreciate them for making t
       author={Jin Liu and Huaibo Huang and Jie Cao and Ran He},
       booktitle={Proceedings of the 32st ACM International Conference on Multimedia (ACM MM)},
       year={2024},
-      
 }
 ```
-
 
 ## Contact
 
