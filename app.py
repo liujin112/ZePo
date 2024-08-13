@@ -426,4 +426,4 @@ def ui():
 
 if __name__ == "__main__":
     demo = ui()
-    demo.launch(server_name='172.18.32.44',show_error=True)
+    demo.launch(show_error=True)
