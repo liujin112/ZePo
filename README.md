@@ -85,4 +85,4 @@ Our code follows several excellent repositories. We appreciate them for making t
 
 ## Contact
 
-If you have any comments or questions, please [open a new issue](https://github.com/liujin112/PortraitDiffusion/issues/new/choose) or feel free to contact the authors.
+If you have any comments or questions, please [open a new issue](https://github.com/liujin112/ZePo/issues/new/choose) or feel free to contact the authors.
