@@ -23,7 +23,7 @@ Diffusion-based text-to-image generation models have significantly advanced the 
 
 ### Requirements
 
-We implement our method with [diffusers](https://github.com/huggingface/diffusers) and the code runs on Python 3.9.17 with Pytorch 2.0.1. You can install the environment by following commands.
+We implement our method with [diffusers](https://github.com/huggingface/diffusers) and the code runs on Python 3.9 with Pytorch 2.0.1. You can install the environment by following commands.
 
 ```base
 conda create -n zepo python=3.9
