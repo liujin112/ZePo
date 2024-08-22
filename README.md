@@ -5,7 +5,7 @@
 Pytorch implementation of [ZePo: Zero-Shot Portrait Stylization with Faster Sampling](https://arxiv.org/abs/2408.05492)
 
 [![arXiv](https://img.shields.io/badge/ArXiv-2408.05492-brightgreen)](https://arxiv.org/abs/2408.05492)
-
+[![demo](https://img.shields.io/badge/Demo-Hugging%20Face-brightgreen)](https://huggingface.co/spaces/Jinl/zepo)
 ---
 
 ## Introduction
@@ -17,7 +17,7 @@ Diffusion-based text-to-image generation models have significantly advanced the 
 ## To-do
 
 - [X] Release the code.
-- [ ] Online Demo
+- [X] Online Demo
 
 ## Usage
 
