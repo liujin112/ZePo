@@ -157,6 +157,20 @@ class ZePoPipeline(DiffusionPipeline, TextualInversionLoaderMixin, LoraLoaderMix
             extra_step_kwargs["generator"] = generator
         return extra_step_kwargs
 
+# Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.run_safety_checker
+    def run_safety_checker(self, image, device, dtype):
+        if self.safety_checker is None:
+            has_nsfw_concept = None
+        else:
+            if torch.is_tensor(image):
+                feature_extractor_input = self.image_processor.postprocess(image, output_type="pil")
+            else:
+                feature_extractor_input = self.image_processor.numpy_to_pil(image)
+            safety_checker_input = self.feature_extractor(feature_extractor_input, return_tensors="pt").to(device)
+            image, has_nsfw_concept = self.safety_checker(
+                images=image, clip_input=safety_checker_input.pixel_values.to(dtype)
+            )
+        return image, has_nsfw_concept
    
     # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.decode_latents
     def decode_latents(self, latents):
@@ -416,7 +430,7 @@ class ZePoPipeline(DiffusionPipeline, TextualInversionLoaderMixin, LoraLoaderMix
         # 9. Post-processing
         if not output_type == "latent":
             image = self.vae.decode(pred_x0 / self.vae.config.scaling_factor, return_dict=False)[0]
-            has_nsfw_concept = None
+            image, has_nsfw_concept = self.run_safety_checker(image, device, prompt_embeds.dtype)
         else:
             image = pred_x0
             has_nsfw_concept = None

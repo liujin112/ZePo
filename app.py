@@ -63,6 +63,12 @@ class GlobalText:
         self.lora_model_state_dict = {}
         self.device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 
+        self.nsfw_image = Image.open('./data/nsfw.jpg') # to float in [0,1]
+        
+        
+        
+
+
     def init_source_image_path(self, source_path):
         self.source_paths = sorted(glob(os.path.join(source_path, '*')))
         self.max_source_index = len(self.source_paths) // 12
@@ -171,7 +177,7 @@ class GlobalText:
                                                  de_bug=de_bug,)
 
             time_begin = datetime.now()
-            generate_image = model(prompt=prompts,
+            results = model(prompt=prompts,
                                 negative_prompt=negative_prompt_textbox,
                                 image=source,
                                 style=style,
@@ -183,7 +189,18 @@ class GlobalText:
                                 fix_step_index=co_feat_step,
                                 de_bug = de_bug,
                                 callback = None
-                   ).images
+                   )
+            generate_image = results.images
+
+        
+            for idx, has_nsfw_concept in enumerate(results.nsfw_content_detected):
+                if has_nsfw_concept:
+                    generate_image[idx] = np.array(self.nsfw_image.resize((height_slider,width_slider))).astype(np.float32) / 255.0
+            
+            # replace black image with "data/nsfw.jpg" np.array(Image.open('./data/nsfw.jpg')).astype(np.float32) / 255.0
+
+                
+
             time_end = datetime.now()
             print('generate one image with time {}'.format(time_end-time_begin))
 
@@ -191,18 +208,19 @@ class GlobalText:
 
             
             save_file_path = os.path.join(self.savedir, save_file_name)
-                    
+                   
             save_image(torch.tensor(generate_image).permute(0, 3, 1, 2), save_file_path, nrow=3, padding=0)
             save_image(torch.tensor(generate_image[2:]).permute(0, 3, 1, 2), os.path.join(self.savedir_sample, save_file_name), nrow=3, padding=0)
             self.init_results_image_path()
-        return [
-            generate_image[0],
-            generate_image[1],
-            generate_image[2],
-            self.init_results_image_path()
-            ]
-    
 
+            return [
+                generate_image[0],
+                generate_image[1],
+                generate_image[2],
+                self.init_results_image_path()
+                ]
+        
+        
 global_text = GlobalText()
 
 
@@ -426,4 +444,4 @@ def ui():
 
 if __name__ == "__main__":
     demo = ui()
-    demo.launch(show_error=True)
+    demo.launch(server_name='172.18.32.44',show_error=True,share=True)
