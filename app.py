@@ -196,8 +196,6 @@ class GlobalText:
             for idx, has_nsfw_concept in enumerate(results.nsfw_content_detected):
                 if has_nsfw_concept:
                     generate_image[idx] = np.array(self.nsfw_image.resize((height_slider,width_slider))).astype(np.float32) / 255.0
-            
-            # replace black image with "data/nsfw.jpg" np.array(Image.open('./data/nsfw.jpg')).astype(np.float32) / 255.0
 
                 
 
